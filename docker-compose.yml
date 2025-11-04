@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: myapp:latest
+    image: ghcr.io/nikolasp98/docker-bundler-template:latest
     container_name: myapp
     ports:
       - "8080:8080"

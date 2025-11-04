@@ -3,12 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
-      - develop
+      - master
   pull_request:
     branches:
-      - main
-      - develop
+      - master
 
 env:
   REGISTRY: ghcr.io
@@ -26,17 +24,20 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-          cache: 'pip'
+          python-version: "3.12"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
 
       - name: Install dependencies
         run: |
-          pip install -r src/requirements.txt
-          pip install -r tests/requirements.txt
+          uv sync --all-extras
 
       - name: Run tests with pytest
         run: |
-          pytest tests/ --cov=src --cov-report=xml --cov-report=term
+          uv run pytest tests/ --cov=src --cov-report=xml --cov-report=term
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v4
@@ -93,7 +94,7 @@ jobs:
     name: Deploy Image
     runs-on: ubuntu-latest
     needs: build
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
 
     steps:
       - name: Checkout code

@@ -3,11 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      platforms:
-        - linux/amd64
-        - linux/arm64
     image: ghcr.io/nikolasp98/docker-bundler-template:latest
-    platform: linux/arm64 # Change to linux/amd64 if running on x86_64
     container_name: myapp
     ports:
       - "0.0.0.0:8080:8080"

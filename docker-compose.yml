@@ -13,7 +13,7 @@ services:
       - DEBUG=true
     volumes:
       # Mount source for hot-reload during development
-      - ./src:/app:ro
+      - ./src:/app/src:ro
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]

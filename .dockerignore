@@ -7,9 +7,7 @@
 .github
 
 # Documentation
-README.md
 docs/
-*.md
 
 # Tests
 tests/
@@ -24,6 +22,7 @@ __pycache__/
 .Python
 env/
 venv/
+.venv/
 ENV/
 build/
 develop-eggs/
@@ -40,6 +39,10 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# UV cache (but keep uv.lock for Docker builds)
+.uv/
+.uv_cache/
 
 # IDE
 .vscode/
